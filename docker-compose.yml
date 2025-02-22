@@ -10,7 +10,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '5000:5000'
+      - '5100:5100'
     environment:
       DATABASE_URL: 'postgresql://postgres:root@postgres:5432/postgres?schema=public'
       NODE_ENV: production
