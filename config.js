@@ -15,7 +15,7 @@ const config = {
   },
   stagging: {
     app: {
-      port: process.env.PROD_PORT || 5000,
+      port: process.env.PROD_PORT || 5100,
       host: process.env.PROD_HOST || '192.168.0.3',
     },
     logging: {
@@ -25,7 +25,7 @@ const config = {
   },
   production: {
     app: {
-      port: process.env.PROD_PORT || 5000,
+      port: process.env.PROD_PORT || 5100,
       host: process.env.PROD_HOST || 'https://api.matrakosala.com',
     },
     logging: {
