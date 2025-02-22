@@ -4,6 +4,8 @@ export const loginController = async (req, res) => {
   const { username, password } = req.body
   try {
     const { user, token } = await loginService(username, password)
+    console.log(user, token)
+
     return res
       .cookie('authToken', token, {
         httpOnly: true,
