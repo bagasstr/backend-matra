@@ -30,6 +30,6 @@ COPY . .
 EXPOSE 5000
 
 # Start the Express server
-CMD ["sh", "-c", "npx prisma migrate deploy && npm run prod"]
+CMD ["sh", "-c", "npx prisma migrate deploy && npm start"]
 
 
