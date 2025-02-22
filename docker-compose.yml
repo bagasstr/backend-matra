@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  backend:
+    image: ghcr.io/bagasstr/backend-matra:latest
+    restart: always
+    #  networks:
+    #    - ix-cloudflared_default
+    build:
+      context: .
+      dockerfile: /app/Dockerfile
+    ports:
+      - '5000:5000'
+    environment:
+      DATABASE_URL: 'postgresql://postgres:root@postgres:5432/postgres?schema=public'
+      NODE_ENV: production
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres_db
+    restart: always
+    #  networks:
+    #    - ix-cloudflared_default
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: postgres
+    volumes:
+      - /mnt/nas/docker-data/postgres:/var/lib/postgressql/data
+    ports:
+      - '5432:5432'
+
+volumes:
+  postgres_data:
+    driver: local
+# networks:
+#   ix-cloudflared_default:
+#     external: true
+#     name: ix-cloudflared_default

@@ -1,0 +1,238 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Artikel {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  content     String
+  author      String
+  category    String
+  tags        String[]
+  publishedAt DateTime? @default(now())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  thumbnail   String
+  seoId       Int?
+  seo         Seo?      @relation(fields: [seoId], references: [id])
+
+  @@index([category], type: Hash)
+}
+
+model PortfolioProyek {
+  id                 Int            @id @default(autoincrement())
+  title              String
+  slug               String         @unique
+  mitraKlien         String
+  ringkasan          String
+  mulaiPelaksanaan   String
+  selesaiPelaksanaan String
+  tipeBangunan       String
+  tanggalPelaksanaan String
+  thumbnail          String?
+  lokasi             String
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @default(now())
+  gambarProyek       GambarProyek[]
+}
+
+model GambarProyek {
+  id                Int              @id @default(autoincrement())
+  url               String?
+  portfolioProyekId Int?
+  PortfolioProyek   PortfolioProyek? @relation(fields: [portfolioProyekId], references: [id], onDelete: Cascade)
+}
+
+model Seo {
+  id              Int       @id @default(autoincrement())
+  type            String
+  pageTitle       String
+  image           String?
+  metaDescription String
+  keywords        String[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @default(now())
+  Artikel         Artikel[]
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model produkMaterial {
+  id                 Int                  @id @unique @default(autoincrement())
+  namaBarang         String
+  thumbnail          String
+  deskripsi          String
+  hargaBarang        Int
+  satuan             String
+  minimalPembelian   Int
+  kelipatanPembelian Int
+  dimensiUnit        String
+  berat              Int
+  merek              String
+  kategori           String
+  subKategori        String
+  jumlahUnit         Int
+  jenisPengiriman    String
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @default(now()) @updatedAt
+  slug               String               @unique
+  estimasiPengiriman estimasiPengiriman[]
+  gambar             gambarProduk[]
+  pasokanArea        pasokanArea[]
+}
+
+model estimasiPengiriman {
+  id               Int             @id @unique @default(autoincrement())
+  area             String
+  durasi           String
+  produkMaterialId Int?
+  produkMaterial   produkMaterial? @relation(fields: [produkMaterialId], references: [id], onDelete: Cascade)
+}
+
+model pasokanArea {
+  id               Int             @id @unique @default(autoincrement())
+  kota             String
+  produkMaterialId Int?
+  produkMaterial   produkMaterial? @relation(fields: [produkMaterialId], references: [id], onDelete: Cascade)
+}
+
+model gambarProduk {
+  id               Int             @id @unique @default(autoincrement())
+  url              String
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @default(now()) @updatedAt
+  produkMaterialId Int?
+  produkMaterial   produkMaterial? @relation(fields: [produkMaterialId], references: [id], onDelete: Cascade)
+}
+
+model Vendor {
+  id             Int      @id @default(autoincrement())
+  namaPerusahaan String
+  pic            String
+  whatsapp       String
+  createdAt      DateTime @default(now())
+  produk         Produk[]
+}
+
+model Produk {
+  id         Int         @id @default(autoincrement())
+  namaProduk String
+  vendorId   Int
+  kategori   String
+  document   String?
+  pajak      Pajak?
+  pembayaran Pembayaran?
+  pengiriman Pengiriman?
+  vendor     Vendor      @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  varian     Varian[]
+  Promo      Promo[]
+}
+
+model Varian {
+  id           Int          @id @default(autoincrement())
+  namaVarian   String?
+  spesifikasi  String
+  hargaSatuan  Float
+  satuanProduk SatuanProduk
+  hargaDiskon  Float?
+  minPembelian Int
+  produkId     Int
+  produk       Produk       @relation(fields: [produkId], references: [id], onDelete: Cascade)
+}
+
+model Pengiriman {
+  id       Int            @id @default(autoincrement())
+  tipe     TipePengiriman
+  area     String
+  jadwal   Int
+  produkId Int            @unique
+  produk   Produk         @relation(fields: [produkId], references: [id], onDelete: Cascade)
+}
+
+model Pajak {
+  id         Int    @id @default(autoincrement())
+  jenisPajak String
+  produkId   Int    @unique
+  produk     Produk @relation(fields: [produkId], references: [id], onDelete: Cascade)
+}
+
+model Pembayaran {
+  id              Int    @id @default(autoincrement())
+  jenisPembayaran String
+  tempo           String
+  lainnya         String
+  produkId        Int    @unique
+  produk          Produk @relation(fields: [produkId], references: [id], onDelete: Cascade)
+}
+
+model PromoType {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  promo Promo[]
+}
+
+model Promo {
+  id             Int       @id @default(autoincrement())
+  produk         Produk    @relation(fields: [produkId], references: [id], onDelete: Cascade)
+  produkId       Int
+  promoType      PromoType @relation(fields: [PromoTypeId], references: [id], onDelete: Cascade)
+  PromoTypeId    Int
+  judul          String?
+  deskripsi      String?
+  diskon         Decimal?  @db.Decimal(5, 2)
+  tanggalMulai   DateTime
+  tanggalSelesai DateTime
+  isActive       Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Testimoni {
+  id        Int      @id @default(autoincrement())
+  company   String
+  testi     String
+  author    String
+  title     String
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum SatuanProduk {
+  PCS
+  KG
+  METER
+  LITER
+  PACK
+}
+
+enum JenisPajak {
+  INCLUDEPPN
+  EXCLUDE_PPN
+  NO_PPN
+}
+
+enum TipePengiriman {
+  FRANCO
+  LOCO
+}
+
+enum JenisPembayaran {
+  CBD
+  COD
+  TEMPO
+  LAINNYA
+}
