@@ -37,6 +37,7 @@ export const getPortfolioByIdService = async (identifier) => {
   try {
     const portfolioProyek = await prisma.portfolioProyek.findUnique({
       where: whereCondition,
+      include: { gambarProyek: true },
     })
     return portfolioProyek
   } catch (error) {
