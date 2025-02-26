@@ -12,7 +12,8 @@ services:
     ports:
       - '5100:5100'
     volumes:
-      - /mnt/nas/docker-data/files_uploads:/app/public/upload
+      - /mnt/nas/docker-data/files_uploads/image:/app/public/upload/image
+      - /mnt/nas/docker-data/files_uploads/document:/app/public/upload/document
     environment:
       DATABASE_URL: 'postgresql://postgres:root@postgres_db:5432/postgres?schema=public'
       NODE_ENV: production
