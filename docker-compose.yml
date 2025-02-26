@@ -11,6 +11,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - '5100:5100'
+    volumes:
+      - /mnt/nas/docker-data/files_uploads:/app/public/upload
     environment:
       DATABASE_URL: 'postgresql://postgres:root@postgres_db:5432/postgres?schema=public'
       NODE_ENV: production
