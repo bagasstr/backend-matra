@@ -27,12 +27,17 @@ const app = express()
 
 // Konfigurasi CORS
 const corsOptions = {
-  origin: (origin, callback) => callback(null, true),
+  origin: ['http://localhost:3000', 'https://matrakosala.com'],
   credentials: true,
-  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
 }
 app.use(cors(corsOptions))
+// const corsOptions = {
+//   origin: (origin, callback) => callback(null, true),
+//   credentials: true,
+//   methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE', 'PATCH'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+// }
+// app.use(cors(corsOptions))
 
 // Middleware Global
 app.use(express.json())
@@ -41,10 +46,6 @@ app.use(express.urlencoded({ extended: true }))
 
 // Konfigurasi Static File
 const __dirname = path.resolve()
-app.use(
-  '/upload/image',
-  express.static(path.join(__dirname, 'public/upload/image'))
-)
 app.use('/upload', express.static(path.join(__dirname, 'public', 'upload')))
 
 // Dokumentasi API
