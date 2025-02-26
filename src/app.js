@@ -27,8 +27,10 @@ const app = express()
 
 // Konfigurasi CORS
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://matrakosala.com'],
-  credentials: true,
+  origin: ['http://localhost:3000', 'https://matrakosala.com'], // Sesuaikan dengan domain frontend
+  credentials: true, // Izinkan cookie jika perlu
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }
 app.use(cors(corsOptions))
 // const corsOptions = {
