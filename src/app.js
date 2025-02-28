@@ -31,6 +31,7 @@ const corsOptions = {
     'http://localhost:3000',
     'https://matrakosala.com',
     'https://staging.matrakosala.com',
+    'https://63a7-111-94-111-154.ngrok-free.app',
   ], // Sesuaikan dengan domain frontend
   credentials: true, // Izinkan cookie jika perlu
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
