@@ -7,7 +7,7 @@ import {
   deletePortfolioService,
 } from './portofolioService.js'
 import slugify from 'slugify'
-import { deleteGambar } from '../../utils/handlerFormidable.js'
+import { deleteGambar, deleteThumbnail } from '../../utils/handlerFormidable.js'
 import { getPagination, paginationRes } from '../../utils/helper.js'
 import prisma from '../../config/database.js'
 import fs from 'fs'
@@ -242,6 +242,9 @@ export const deletePortofoliocontroller = async (req, res) => {
 
     if (existPortf.gambarProyek) {
       deleteGambar(existPortf.gambarProyek)
+    }
+    if (existPortf.thumbnail) {
+      deleteThumbnail(existPortf.thumbnail)
     }
 
     await deletePortfolioService(identifier)
