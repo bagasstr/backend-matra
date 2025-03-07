@@ -19,12 +19,10 @@ const options = {
         url: 'https://opensource.org/licenses/MIT',
       },
     },
-    servers: [
-      {
-        url: process.env.PROD_HOST || 'https://api.matrakosala.com',
-        description: 'Production server',
-      },
-    ],
+    servers: {
+      url: process.env.PROD_HOST || 'https://api.matrakosala.com',
+      description: 'Production server',
+    },
   },
   apis: ['src/docs/*.docs.js'],
 }
