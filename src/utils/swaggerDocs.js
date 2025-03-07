@@ -20,10 +20,10 @@ const options = {
       },
     },
     servers: [
-      {
-        url: 'http://localhost:5200',
-        description: 'Development server',
-      },
+      // {
+      //   url: 'http://localhost:5200',
+      //   description: 'Development server',
+      // },
       {
         url: 'https://api.matrakosala.com',
         description: 'Production server',
