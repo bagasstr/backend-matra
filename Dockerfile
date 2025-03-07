@@ -27,7 +27,7 @@ RUN npx prisma generate
 COPY . .
 
 # Expose the port
-EXPOSE 5000
+EXPOSE 5200
 
 # Start the Express server
 CMD ["sh", "-c", "npx prisma migrate deploy && npm start"]

@@ -29,6 +29,7 @@ const app = express()
 const corsOptions = {
   origin: [
     'http://localhost:3000',
+    'http://localhost:5100/api-docs/',
     'https://matrakosala.com',
     'https://staging.matrakosala.com',
     'https://63a7-111-94-111-154.ngrok-free.app',

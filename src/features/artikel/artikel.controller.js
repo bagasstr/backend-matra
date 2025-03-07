@@ -63,7 +63,7 @@ export const getArtikelByIdController = async (req, res) => {
 
 export const createArtikelController = async (req, res) => {
   try {
-    const { title, content, category, tags } = req.body
+    const { title, content, category, refrensi } = req.body
     const { thumbnail } = req.files
 
     const validasiKategory = validateCategory(category, validCategories)
@@ -71,7 +71,6 @@ export const createArtikelController = async (req, res) => {
       where: { title },
       select: {
         slug: true,
-        // gambar: true,
         thumbnail: true,
       },
     })
@@ -86,8 +85,8 @@ export const createArtikelController = async (req, res) => {
     if (!validateReqBody(req.body, ['title', 'content'])) {
       return res.status(400).json({ message: 'Data tidak lengkap' })
     }
-    const processedTags =
-      typeof tags === 'string' ? tags.split(',').map((tag) => tag.trim()) : tags
+    // const processedTags =
+    //   typeof tags === 'string' ? tags.split(',').map((tag) => tag.trim()) : tags
 
     const slug = slugify(title, {
       lower: true,
@@ -117,7 +116,8 @@ export const createArtikelController = async (req, res) => {
       content,
       slug,
       author: authors,
-      tags: processedTags,
+      // tags: processedTags,
+      refrensi,
       seoId: seoArtikel.id,
       category: validasiKategory,
       thumbnail: thumbnail

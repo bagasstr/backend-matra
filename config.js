@@ -8,10 +8,10 @@ const config = {
       port: process.env.DEV_PORT || 5100,
       host: process.env.DEV_HOST || 'localhost',
     },
-    logging: {
-      level: 'info',
-      enableConsole: true,
-    },
+    // logging: {
+    //   level: 'info',
+    //   enableConsole: true,
+    // },
   },
   stagging: {
     app: {

@@ -16,7 +16,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:5000",
+      "url": "http://localhost:5200",
       "description": "Development server"
     },
     {
@@ -336,6 +336,858 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/portfolio": {
+      "get": {
+        "summary": "Get all portfolio with pagination",
+        "tags": [
+          "Portfolio"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "The page number for pagination"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 6
+            },
+            "description": "The number of items per page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "currentPage": {
+                      "type": "integer"
+                    },
+                    "totalPages": {
+                      "type": "integer"
+                    },
+                    "totalItems": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "slug": {
+                            "type": "string"
+                          },
+                          "content": {
+                            "type": "string"
+                          },
+                          "category": {
+                            "type": "string"
+                          },
+                          "gambar": {
+                            "type": "string"
+                          },
+                          "thumbnail": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "deletedAt": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tidak ada data"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new portfolio project",
+        "tags": [
+          "Portfolio"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "mitraKlien": {
+                    "type": "string"
+                  },
+                  "ringkasan": {
+                    "type": "string"
+                  },
+                  "tanggalPelaksanaan": {
+                    "type": "string"
+                  },
+                  "lokasi": {
+                    "type": "string"
+                  },
+                  "tipeBangunan": {
+                    "type": "string"
+                  },
+                  "thumbnail": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Portfolio berhasil ditambahkan"
+          },
+          "400": {
+            "description": "gagal menambahkan portfolio"
+          }
+        }
+      }
+    },
+    "/api/portfolio/{id}": {
+      "get": {
+        "summary": "Get a portfolio project by ID or slug",
+        "tags": [
+          "Portfolio"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The portfolio ID or slug"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "slug": {
+                            "type": "string"
+                          },
+                          "content": {
+                            "type": "string"
+                          },
+                          "category": {
+                            "type": "string"
+                          },
+                          "gambar": {
+                            "type": "string"
+                          },
+                          "thumbnail": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "deletedAt": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Portfolio tidak ada"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a portfolio project",
+        "tags": [
+          "Portfolio"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The portfolio ID or slug"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a portfolio project",
+        "tags": [
+          "Portfolio"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The portfolio ID or slug"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "mitraKlien": {
+                    "type": "string"
+                  },
+                  "ringkasan": {
+                    "type": "string"
+                  },
+                  "tanggalPelaksanaan": {
+                    "type": "string"
+                  },
+                  "lokasi": {
+                    "type": "string"
+                  },
+                  "tipeBangunan": {
+                    "type": "string"
+                  },
+                  "thumbnail": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/testimoni": {
+      "get": {
+        "summary": "Get all testimoni with pagination",
+        "tags": [
+          "Testimoni"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Number of items to skip"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 6
+            },
+            "description": "Number of items to retrieve"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "currentPage": {
+                      "type": "integer"
+                    },
+                    "totalPages": {
+                      "type": "integer"
+                    },
+                    "totalItems": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "company": {
+                            "type": "string"
+                          },
+                          "testi": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "author": {
+                            "type": "string"
+                          },
+                          "image": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters"
+          },
+          "404": {
+            "description": "Testimoni not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new testimoni",
+        "tags": [
+          "Testimoni"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "author": {
+                    "type": "string"
+                  },
+                  "company": {
+                    "type": "string"
+                  },
+                  "testi": {
+                    "type": "string"
+                  },
+                  "thumbnail": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Testimoni created successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/testimoni/{id}": {
+      "get": {
+        "summary": "Get testimoni by ID",
+        "tags": [
+          "Testimoni"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Testimoni ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Testimoni not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a testimoni by ID",
+        "tags": [
+          "Testimoni"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Testimoni ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "author": {
+                    "type": "string"
+                  },
+                  "company": {
+                    "type": "string"
+                  },
+                  "testi": {
+                    "type": "string"
+                  },
+                  "thumbnail": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Testimoni updated successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "404": {
+            "description": "Testimoni not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a testimoni by ID",
+        "tags": [
+          "Testimoni"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Testimoni ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Testimoni deleted successfully"
+          },
+          "404": {
+            "description": "Testimoni not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/vendor": {
+      "get": {
+        "summary": "Get all vendors",
+        "tags": [
+          "Vendor"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "namaPerusahaan": {
+                        "type": "string"
+                      },
+                      "pic": {
+                        "type": "string"
+                      },
+                      "whatsapp": {
+                        "type": "string"
+                      },
+                      "produk": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "namaProduk": {
+                              "type": "string"
+                            },
+                            "kategori": {
+                              "type": "string"
+                            },
+                            "document": {
+                              "type": "string"
+                            },
+                            "varian": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "namaVarian": {
+                                    "type": "string"
+                                  },
+                                  "spesifikasi": {
+                                    "type": "string"
+                                  },
+                                  "hargaSatuan": {
+                                    "type": "number"
+                                  },
+                                  "satuanProduk": {
+                                    "type": "string"
+                                  },
+                                  "hargaDiskon": {
+                                    "type": "number"
+                                  },
+                                  "minPembelian": {
+                                    "type": "number"
+                                  }
+                                }
+                              }
+                            },
+                            "pengiriman": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "tipe": {
+                                    "type": "string"
+                                  },
+                                  "area": {
+                                    "type": "string"
+                                  },
+                                  "jadwal": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "pajak": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "jenisPajak": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "pembayaran": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "jenisPembayaran": {
+                                    "type": "string"
+                                  },
+                                  "tempo": {
+                                    "type": "string"
+                                  },
+                                  "lainnya": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new vendor",
+        "tags": [
+          "Vendor"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "namaProduk": {
+                    "type": "string"
+                  },
+                  "kategori": {
+                    "type": "string"
+                  },
+                  "document": {
+                    "type": "string"
+                  },
+                  "varian": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "namaVarian": {
+                          "type": "string"
+                        },
+                        "spesifikasi": {
+                          "type": "string"
+                        },
+                        "hargaSatuan": {
+                          "type": "number"
+                        },
+                        "satuanProduk": {
+                          "type": "string"
+                        },
+                        "hargaDiskon": {
+                          "type": "number"
+                        },
+                        "minPembelian": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  "pengiriman": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "tipe": {
+                          "type": "string"
+                        },
+                        "area": {
+                          "type": "string"
+                        },
+                        "jadwal": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "pajak": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "jenisPajak": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "pembayaran": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "jenisPembayaran": {
+                          "type": "string"
+                        },
+                        "tempo": {
+                          "type": "string"
+                        },
+                        "lainnya": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Vendor created successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/vendor/{id}": {
+      "get": {
+        "summary": "Get a vendor by ID",
+        "tags": [
+          "Vendor"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Vendor ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Vendor not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a vendor by ID",
+        "tags": [
+          "Vendor"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Vendor ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vendor deleted successfully"
+          },
+          "404": {
+            "description": "Vendor not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }

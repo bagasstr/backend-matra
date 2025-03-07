@@ -46,6 +46,7 @@ export const createVendorController = async (req, res) => {
     const document = req.files
 
     let parsedProduk = Array.isArray(produk) ? produk : JSON.parse(produk)
+    console.log(namaPerusahaan, pic, whatsapp, parsedProduk)
 
     const kategori = kategoriVendor(parsedProduk.namaProduk)
     parsedProduk.kategori = kategori

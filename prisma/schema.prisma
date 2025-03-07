@@ -14,7 +14,7 @@ model Artikel {
   content     String
   author      String
   category    String
-  tags        String[]
+  refrensi    String
   publishedAt DateTime? @default(now())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @default(now()) @updatedAt
