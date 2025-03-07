@@ -16,10 +16,6 @@
   },
   "servers": [
     {
-      "url": "http://localhost:5200",
-      "description": "Development server"
-    },
-    {
       "url": "https://api.matrakosala.com",
       "description": "Production server"
     }
@@ -28,9 +24,7 @@
     "/api/artikel": {
       "get": {
         "summary": "Get all artikel",
-        "tags": [
-          "Artikel"
-        ],
+        "tags": ["Artikel"],
         "responses": {
           "200": {
             "description": "Success",
@@ -110,9 +104,7 @@
       },
       "post": {
         "summary": "Create artikel",
-        "tags": [
-          "Artikel"
-        ],
+        "tags": ["Artikel"],
         "requestBody": {
           "required": true,
           "content": {
@@ -173,9 +165,7 @@
     "/api/artikel/{id}": {
       "get": {
         "summary": "Get artikel by id",
-        "tags": [
-          "Artikel"
-        ],
+        "tags": ["Artikel"],
         "parameters": [
           {
             "in": "path",
@@ -233,9 +223,7 @@
       },
       "delete": {
         "summary": "Delete artikel by id",
-        "tags": [
-          "Artikel"
-        ],
+        "tags": ["Artikel"],
         "parameters": [
           {
             "in": "path",
@@ -269,9 +257,7 @@
     "/api/artikel/{slug}": {
       "put": {
         "summary": "Update artikel",
-        "tags": [
-          "Artikel"
-        ],
+        "tags": ["Artikel"],
         "parameters": [
           {
             "in": "path",
@@ -343,9 +329,7 @@
     "/api/portfolio": {
       "get": {
         "summary": "Get all portfolio with pagination",
-        "tags": [
-          "Portfolio"
-        ],
+        "tags": ["Portfolio"],
         "parameters": [
           {
             "in": "query",
@@ -436,9 +420,7 @@
       },
       "post": {
         "summary": "Create a new portfolio project",
-        "tags": [
-          "Portfolio"
-        ],
+        "tags": ["Portfolio"],
         "requestBody": {
           "required": true,
           "content": {
@@ -485,9 +467,7 @@
     "/api/portfolio/{id}": {
       "get": {
         "summary": "Get a portfolio project by ID or slug",
-        "tags": [
-          "Portfolio"
-        ],
+        "tags": ["Portfolio"],
         "parameters": [
           {
             "in": "path",
@@ -560,9 +540,7 @@
       },
       "delete": {
         "summary": "Delete a portfolio project",
-        "tags": [
-          "Portfolio"
-        ],
+        "tags": ["Portfolio"],
         "parameters": [
           {
             "in": "path",
@@ -585,9 +563,7 @@
       },
       "put": {
         "summary": "Update a portfolio project",
-        "tags": [
-          "Portfolio"
-        ],
+        "tags": ["Portfolio"],
         "parameters": [
           {
             "in": "path",
@@ -645,9 +621,7 @@
     "/api/testimoni": {
       "get": {
         "summary": "Get all testimoni with pagination",
-        "tags": [
-          "Testimoni"
-        ],
+        "tags": ["Testimoni"],
         "parameters": [
           {
             "in": "query",
@@ -738,9 +712,7 @@
       },
       "post": {
         "summary": "Create new testimoni",
-        "tags": [
-          "Testimoni"
-        ],
+        "tags": ["Testimoni"],
         "requestBody": {
           "required": true,
           "content": {
@@ -784,9 +756,7 @@
     "/api/testimoni/{id}": {
       "get": {
         "summary": "Get testimoni by ID",
-        "tags": [
-          "Testimoni"
-        ],
+        "tags": ["Testimoni"],
         "parameters": [
           {
             "in": "path",
@@ -812,9 +782,7 @@
       },
       "put": {
         "summary": "Update a testimoni by ID",
-        "tags": [
-          "Testimoni"
-        ],
+        "tags": ["Testimoni"],
         "parameters": [
           {
             "in": "path",
@@ -870,9 +838,7 @@
       },
       "delete": {
         "summary": "Delete a testimoni by ID",
-        "tags": [
-          "Testimoni"
-        ],
+        "tags": ["Testimoni"],
         "parameters": [
           {
             "in": "path",
@@ -900,9 +866,7 @@
     "/api/vendor": {
       "get": {
         "summary": "Get all vendors",
-        "tags": [
-          "Vendor"
-        ],
+        "tags": ["Vendor"],
         "responses": {
           "200": {
             "description": "Success",
@@ -1026,9 +990,7 @@
       },
       "post": {
         "summary": "Create a new vendor",
-        "tags": [
-          "Vendor"
-        ],
+        "tags": ["Vendor"],
         "requestBody": {
           "required": true,
           "content": {
@@ -1137,9 +1099,7 @@
     "/api/vendor/{id}": {
       "get": {
         "summary": "Get a vendor by ID",
-        "tags": [
-          "Vendor"
-        ],
+        "tags": ["Vendor"],
         "parameters": [
           {
             "in": "path",
@@ -1165,9 +1125,7 @@
       },
       "delete": {
         "summary": "Delete a vendor by ID",
-        "tags": [
-          "Vendor"
-        ],
+        "tags": ["Vendor"],
         "parameters": [
           {
             "in": "path",
