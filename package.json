@@ -4,7 +4,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production nodemon --watch src --watch server.js --ext js,json --delay 2 --exec \"npm run swagger && node server.js\"",
     "swagger": "node src/utils/swaggerDocs.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development nodemon --watch src --watch server.js --ext js,json --delay 2 --exec \"npm run swagger && node server.js\"",
