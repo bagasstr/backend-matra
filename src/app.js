@@ -60,6 +60,7 @@ app.use('/upload', express.static(path.join(__dirname, 'public', 'upload')))
 app.use(
   '/api-docs',
   swaggerUi.serve,
+
   swaggerUi.setup(swaggerDoc, swaggerDocs.swaggerUiOptions)
 )
 

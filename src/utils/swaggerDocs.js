@@ -21,7 +21,7 @@ const options = {
     },
     servers: [
       {
-        url: 'https://api.matrakosala.com',
+        url: process.env.PROD_HOST || 'https://api.matrakosala.com',
         description: 'Production server',
       },
     ],
