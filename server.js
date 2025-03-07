@@ -7,5 +7,5 @@ dotenv.config()
 const server = http.createServer(app)
 
 server.listen(config.app.port, () => {
-  console.log(`Server is running on ${config.app.host}:${config.app.port}`)
+  console.log(`Server is running on ${config.app.host}`)
 })
