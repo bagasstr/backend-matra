@@ -10,7 +10,6 @@ export const getArtikelService = async (filter, skip, limit) => {
       select: {
         id: true,
         title: true,
-        tags: true,
         category: true,
         content: true,
         slug: true,
