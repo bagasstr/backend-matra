@@ -59,6 +59,7 @@ app.use(cors(corsOptions))
 // Middleware Global
 app.use(express.json())
 app.use(cookieParser())
+app.options('*', cors(corsOptions))
 app.use(express.urlencoded({ extended: true }))
 
 // Konfigurasi Static File

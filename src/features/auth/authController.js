@@ -12,6 +12,11 @@ export const loginController = async (req, res) => {
         secure: true,
         maxAge: 24 * 60 * 60 * 1000,
         sameSite: 'none',
+        domain:
+          process.env.NODE_ENV === 'production'
+            ? '.matrakosala.com'
+            : 'localhost',
+        path: '/',
       })
       .status(200)
       .json()
