@@ -1,6 +1,6 @@
-import prisma from '../../config/database.js'
-import { deleteGambar } from '../../utils/handlerFormidable.js'
-import { extractGambar, getWhereIdentifier } from '../../utils/helper.js'
+import prisma from "../../config/database.js";
+import { deleteGambar } from "../../utils/handlerFormidable.js";
+import { extractGambar, getWhereIdentifier } from "../../utils/helper.js";
 
 export const getPortfolioService = async (filter, skip, limit) => {
   try {
@@ -24,26 +24,26 @@ export const getPortfolioService = async (filter, skip, limit) => {
         createdAt: true,
       },
 
-      orderBy: { createdAt: 'desc' },
-    })
+      orderBy: { createdAt: "desc" },
+    });
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
-}
+};
 
 export const getPortfolioByIdService = async (identifier) => {
-  const whereCondition = getWhereIdentifier(identifier)
+  const whereCondition = getWhereIdentifier(identifier);
 
   try {
     const portfolioProyek = await prisma.portfolioProyek.findUnique({
       where: whereCondition,
       include: { gambarProyek: true },
-    })
-    return portfolioProyek
+    });
+    return portfolioProyek;
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
-}
+};
 
 export const createPortfolioService = async ({
   title,
@@ -58,7 +58,7 @@ export const createPortfolioService = async ({
   gambar,
   slug,
 }) => {
-  const extractsGambar = extractGambar(gambar)
+  const extractsGambar = extractGambar(gambar);
 
   try {
     const portfolio = await prisma.portfolioProyek.create({
@@ -77,12 +77,12 @@ export const createPortfolioService = async ({
           gambar.length > 0 ? { create: extractsGambar } : undefined,
       },
       include: { gambarProyek: true },
-    })
-    return portfolio
+    });
+    return portfolio;
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
-}
+};
 
 export const updatePortfolioService = async ({
   identifier,
@@ -97,7 +97,7 @@ export const updatePortfolioService = async ({
   lokasi,
   thumbnail,
 }) => {
-  const whereCondition = getWhereIdentifier(identifier)
+  const whereCondition = getWhereIdentifier(identifier);
 
   try {
     return await prisma.portfolioProyek.update({
@@ -115,21 +115,21 @@ export const updatePortfolioService = async ({
         thumbnail: thumbnail,
       },
       include: { gambarProyek: true },
-    })
+    });
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
-}
+};
 
 export const deletePortfolioService = async (identifier) => {
-  const whereCondition = getWhereIdentifier(identifier)
+  const whereCondition = getWhereIdentifier(identifier);
 
   try {
     const portfolio = await prisma.portfolioProyek.delete({
       where: whereCondition,
-    })
-    return portfolio
+    });
+    return portfolio;
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
-}
+};

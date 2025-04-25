@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: ghcr.io/bagasstr/backend-matra:latest
+    image: ghcr.io/bagasstr/api-matrakosala:1.8
     restart: always
     networks:
       - ix-cloudflared_default

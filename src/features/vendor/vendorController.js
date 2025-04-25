@@ -66,7 +66,7 @@ export const createVendorController = async (req, res) => {
       whatsapp,
       produk: parsedProduk,
     })
-    // sendEmail(`[Notifikasi]: vendor baru dari ${vendor.namaPerusahaan}`)
+    sendEmail(`[Notifikasi]: vendor baru dari ${vendor.namaPerusahaan}`)
 
     return res.status(200).json({
       status: 'success',

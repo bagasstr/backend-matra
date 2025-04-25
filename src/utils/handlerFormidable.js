@@ -1,3 +1,4 @@
+import { response } from 'express'
 import fs from 'fs'
 import path from 'path'
 
@@ -15,15 +16,22 @@ export const deleteGambar = (image) => {
 }
 
 export const deleteThumbnail = (thumb) => {
-  thumb.forEach((i) => {
+  if (!thumb) return
+  if (Array.isArray(thumb)) {
     try {
-      if (fs.existsSync(path.join(__dirname, 'public/', i.thumbnail))) {
-        fs.unlinkSync(path.join(__dirname, 'public/', i.thumbnail))
-      }
+      thumb.forEach((file) => {
+        fs.unlinkSync(path.join(__dirname, 'public/', file.thumbnail))
+      })
     } catch (error) {
-      console.error('Gagal menghapus file thumbnail:', error)
+      throw new Error(error.message || 'Gagal menghapus file semua thumbnail')
     }
-  })
+  } else if (typeof thumb === 'string') {
+    try {
+      fs.unlinkSync(path.join(__dirname, 'public/', thumb))
+    } catch (error) {
+      throw new Error(error.message || 'Gagal menghapus file thumbnail')
+    }
+  }
 }
 
 export const deleteDocument = (document) => {

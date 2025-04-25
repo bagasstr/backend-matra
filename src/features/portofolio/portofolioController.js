@@ -74,6 +74,13 @@ export const createPortofolioController = async (req, res) => {
     } = req.body
     const { gambar, thumbnail } = req.files
 
+    if (thumbnail.length === 0) {
+      return res.status(400).json({ message: 'Silahkan upload thumbnail' })
+    }
+    if (gambar.length === 0) {
+      return res.status(400).json({ message: 'Silahkan upload gambar' })
+    }
+
     const category = (text) => {
       return text
         .toString()

@@ -1,7 +1,7 @@
 import { verifyToken } from '../utils/jwtUtils.js'
 
 export const authenticate = async (req, res, next) => {
-  const tokenReq = req.cookies?.authToken
+  const tokenReq = req.cookies?.authToken || req.headers?.authorization
 
   if (!tokenReq) {
     return res.status(401).json({ message: 'Akses Ditolak' })

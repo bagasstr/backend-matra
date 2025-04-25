@@ -1,20 +1,19 @@
 import nodemailer from 'nodemailer'
 
 export const transporter = nodemailer.createTransport({
-   service: 'gmail',
-   auth: {
-      user: 'raflinaufalalief21@gmail.com', // Email gmail
-      pass: process.env.EMAIL_PASSWORD, // Password gmail app
-   },
-   secure: true,
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL, // Email gmail
+    pass: process.env.EMAIL_PASSWORD, // Password gmail app
+  },
 })
 
 export function sendEmail(subject) {
-   const mailOptions = {
-      from: 'raflinaufalalief21@gmail.com',
-      to: '17210839@bsi.ac.id',
-      subject: subject,
-      html: `
+  const mailOptions = {
+    from: `"Notifikasi" <${process.env.EMAIL}>`,
+    to: process.env.TO_EMAIL,
+    subject: subject,
+    html: `
       <!DOCTYPE html>
       <html lang="id">
          <head>
@@ -96,23 +95,24 @@ export function sendEmail(subject) {
          </body>
       </html>
    `,
-   }
+  }
 
-   transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-         console.log('Error sending email:', error)
-      } else {
-         console.log('Email sent:', info.response)
-      }
-   })
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log('Error sending email:', error)
+    } else {
+      console.log('Email sent:', info.response)
+    }
+  })
 }
 
 export function sendEmailModal(subject, data) {
-   const mailOptions = {
-      from: 'raflinaufalalief21@gmail.com',
-      to: '17210839@bsi.ac.id',
-      subject: subject,
-      html: `
+  const mailOptions = {
+    from: `"Notifikasi" <${process.env.EMAIL}>`,
+    to: process.env.TO_EMAIL,
+
+    subject: subject,
+    html: `
       <!DOCTYPE html>
       <html lang="id">
          <head>
@@ -139,13 +139,13 @@ export function sendEmailModal(subject, data) {
          </body>
       </html>
    `,
-   }
+  }
 
-   transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-         console.log('Error sending email:', error)
-      } else {
-         console.log('Email sent:', info.response)
-      }
-   })
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log('Error sending email:', error)
+    } else {
+      console.log('Email sent:', info.response)
+    }
+  })
 }

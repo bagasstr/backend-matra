@@ -16,6 +16,7 @@ import seoRoute from './features/seo/seoRoute.js'
 import materialRoute from './features/material/materialRoute.js'
 import testiRoute from './features/testimoni/testiRoute.js'
 import swaggerDocs from './utils/swaggerDocs.js'
+import { authenticate } from './middleware/authMiddleware.js'
 
 const require = createRequire(import.meta.url)
 const swaggerDoc = require('../swagger.json')
@@ -25,15 +26,23 @@ dotenv.config()
 
 const app = express()
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5100/api-docs/',
+  'https://matrakosala.com',
+  'https://matrakosala-generator.vercel.app',
+  'https://staging.matrakosala.com',
+  'https://63a7-111-94-111-154.ngrok-free.app',
+]
 // Konfigurasi CORS
 const corsOptions = {
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5100/api-docs/',
-    'https://matrakosala.com',
-    'https://staging.matrakosala.com',
-    'https://63a7-111-94-111-154.ngrok-free.app',
-  ], // Sesuaikan dengan domain frontend
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true, // Izinkan cookie jika perlu
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
