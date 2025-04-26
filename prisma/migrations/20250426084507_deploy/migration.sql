@@ -18,7 +18,7 @@ CREATE TABLE "Artikel" (
     "content" TEXT NOT NULL,
     "author" TEXT NOT NULL,
     "category" TEXT NOT NULL,
-    "tags" TEXT[],
+    "refrensi" TEXT NOT NULL,
     "publishedAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
